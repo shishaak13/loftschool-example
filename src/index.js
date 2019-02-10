@@ -76,11 +76,13 @@ function returnCounter(number = 0) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
- arr = [];
- for (i = 0; i < arr.length; i++) {
+ var arr = [];
+
+  for (i = 0; i < arr.length; i++) {
    arr.push[i];
- }
- return arr
+  }
+
+ return arr;
   }
 
 /*
