@@ -19,6 +19,7 @@ function returnFirstArgument(a) {
 /*
  Задание 2:
 
+
  2.1: Функция должна возвращать сумму переданных аргументов
 
  Пример:
@@ -59,11 +60,10 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number = 0) 
-{
+function returnCounter(number = 0) {
   return function F() {
     return ++number;
-        }
+  }
 }
 
 /*
@@ -76,9 +76,11 @@ function returnCounter(number = 0)
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-  arg = [];
-  for (i = 0; i<length.arg; i++){return arg}
-  
+ arr = [];
+ for (i = 0; i < arr.length; i++) {
+   arr.push[i];
+ }
+ return arr
   }
 
 /*
