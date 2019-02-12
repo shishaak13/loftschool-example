@@ -76,14 +76,7 @@ function returnCounter(number = 0) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
- var arr = [];
-
-  for (i = 0; i < arr.length; i++) {
-   arr.push[i];
-  }
-
- return arr;
-  }
+}
 
 /*
  Задание 6 *:
