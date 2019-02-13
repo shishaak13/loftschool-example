@@ -7,6 +7,8 @@
  Посмотрите как работает forEach и повторите это поведение для массива, который будет передан в параметре array
  */
 function forEach(array, fn) {
+  
+  array.forEach(function(item, i ,array) {} )
 }
 
 /*
