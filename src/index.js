@@ -8,7 +8,10 @@
  */
 function forEach(array, fn) {
   
-  array.forEach(function(item, i ,array) {} )
+    for (let i = 0; i < array.length; i++ ) {
+
+        fn(array[i], i, array);
+    }
 }
 
 /*
@@ -18,6 +21,13 @@ function forEach(array, fn) {
  Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
  */
 function map(array, fn) {
+var arr = [];
+
+    for (let i = 0; i < array.length; i++ ) {
+
+        arr.push(fn(array[i], i, array));
+    }
+return arr;
 }
 
 /*
@@ -27,7 +37,21 @@ function map(array, fn) {
  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
  */
 function reduce(array, fn, initial) {
+    var  i, result = initial || array[0];
+
+    if ( i = initial) 
+     {i = 0; } 
+     else 
+     { i =1 };
+
+    for (i; i < array.length; i = i + 1) {
+
+        result = fn(result,array[i], i,  array);
+    }
+return result;
 }
+
+
 
 /*
  Задание 4:
@@ -38,6 +62,14 @@ function reduce(array, fn, initial) {
    upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
  */
 function upperProps(obj) {
+    var arr = [];
+
+    for (var key in obj) {
+
+        key = key.toUpperCase();
+        arr.push(key);
+    }
+return arr;
 }
 
 /*
