@@ -17,7 +17,14 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
-}
+  try {
+    if (array = []) {
+      throw new Error ('Empty array') }
+  }
+      catch (e) {console.log(e.message)}
+    
+  }
+
 
 /*
  Задание 2:
