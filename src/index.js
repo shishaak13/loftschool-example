@@ -19,7 +19,7 @@
 function isAllTrue(array, fn) {
 
     if (!Array.isArray(array) || array.length === 0 ) {
-        throw new Error ('empty array')
+        throw new Error ('empty array');
     }
 
     if (typeof fn !=='function') {
