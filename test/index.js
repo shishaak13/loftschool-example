@@ -1,6 +1,166 @@
-import { assert } from 'chai';
-import { randomValue } from '../helper';
-import {
+/* ДЗ 4 - работа с DOM */
+
+/*
+ Задание 1:
+
+ 1.1: Функция должна создать элемент с тегом DIV
+
+ 1.2: В созданный элемент необходимо поместить текст, переданный в параметр text
+
+ Пример:
+   createDivWithText('loftschool') // создаст элемент div, поместит в него 'loftschool' и вернет созданный элемент
+ */
+function createDivWithText(text) {
+}
+
+/*
+ Задание 2:
+
+ Функция должна вставлять элемент, переданный в переметре what в начало элемента, переданного в параметре where
+
+ Пример:
+   prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
+ */
+function prepend(what, where) {
+}
+
+/*
+ Задание 3:
+
+ 3.1: Функция должна перебрать все дочерние элементы узла, переданного в параметре where
+
+ 3.2: Функция должна вернуть массив, состоящий из тех дочерних элементов следующим соседом которых является элемент с тегом P
+
+ Пример:
+   Представим, что есть разметка:
+   <body>
+      <div></div>
+      <p></p>
+      <a></a>
+      <span></span>
+      <p></p>
+   </dody>
+
+   findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
+ */
+function findAllPSiblings(where) {
+}
+
+/*
+ Задание 4:
+
+ Функция представленная ниже, перебирает все дочерние узлы типа "элемент" внутри узла переданного в параметре where и возвращает массив из текстового содержимого найденных элементов
+ Но похоже, что в код функции закралась ошибка и она работает не так, как описано.
+
+ Необходимо найти и исправить ошибку в коде так, чтобы функция работала так, как описано выше.
+
+ Пример:
+   Представим, что есть разметка:
+   <body>
+      <div>привет</div>
+      <div>loftschool</div>
+   </dody>
+
+   findError(document.body) // функция должна вернуть массив с элементами 'привет' и 'loftschool'
+ */
+function findError(where) {
+    var result = [];
+
+    for (var child of where.childNodes) {
+        result.push(child.innerText);
+    }
+
+    return result;
+}
+
+/*
+ Задание 5:
+
+ Функция должна перебрать все дочерние узлы элемента переданного в параметре where и удалить из него все текстовые узлы
+
+ Задачу необходимо решить без использования рекурсии, то есть можно не уходить вглубь дерева.
+ Так же будьте внимательны при удалении узлов, т.к. можно получить неожиданное поведение при переборе узлов
+
+ Пример:
+   После выполнения функции, дерево <div></div>привет<p></p>loftchool!!!
+   должно быть преобразовано в <div></div><p></p>
+ */
+function deleteTextNodes(where) {
+}
+
+/*
+ Задание 6:
+
+ Выполнить предудыщее задание с использование рекурсии - то есть необходимо заходить внутрь каждого дочернего элемента (углубляться в дерево)
+
+ Так же будьте внимательны при удалении узлов, т.к. можно получить неожиданное поведение при переборе узлов
+
+ Пример:
+   После выполнения функции, дерево <span> <div> <b>привет</b> </div> <p>loftchool</p> !!!</span>
+   должно быть преобразовано в <span><div><b></b></div><p></p></span>
+ */
+function deleteTextNodesRecursive(where) {
+}
+
+/*
+ Задание 7 *:
+
+ Необходимо собрать статистику по всем узлам внутри элемента переданного в параметре root и вернуть ее в виде объекта
+ Статистика должна содержать:
+ - количество текстовых узлов
+ - количество элементов каждого класса
+ - количество элементов каждого тега
+ Для работы с классами рекомендуется использовать classList
+ Постарайтесь не создавать глобальных переменных
+
+ Пример:
+   Для дерева <div class="some-class-1"><b>привет!</b> <b class="some-class-1 some-class-2">loftschool</b></div>
+   должен быть возвращен такой объект:
+   {
+     tags: { DIV: 1, B: 2},
+     classes: { "some-class-1": 2, "some-class-2": 1 },
+     texts: 3
+   }
+ */
+function collectDOMStat(root) {
+}
+
+/*
+ Задание 8 *:
+
+ 8.1: Функция должна отслеживать добавление и удаление элементов внутри элемента переданного в параметре where
+ Как только в where добавляются или удаляются элементы,
+ необходимо сообщать об этом при помощи вызова функции переданной в параметре fn
+
+ 8.2: При вызове fn необходимо передавать ей в качестве аргумента объект с двумя свойствами:
+   - type: типа события (insert или remove)
+   - nodes: массив из удаленных или добавленных элементов (в зависимости от события)
+
+ 8.3: Отслеживание должно работать вне зависимости от глубины создаваемых/удаляемых элементов
+
+ Рекомендуется использовать MutationObserver
+
+ Пример:
+   Если в where или в одного из его детей добавляется элемент div
+   то fn должна быть вызвана с аргументом:
+   {
+     type: 'insert',
+     nodes: [div]
+   }
+
+   ------
+
+   Если из where или из одного из его детей удаляется элемент div
+   то fn должна быть вызвана с аргументом:
+   {
+     type: 'remove',
+     nodes: [div]
+   }
+ */
+function observeChildNodes(where, fn) {
+}
+
+export {
     createDivWithText,
     prepend,
     findAllPSiblings,
@@ -9,235 +169,4 @@ import {
     deleteTextNodesRecursive,
     collectDOMStat,
     observeChildNodes
-} from '../src/index';
-
-function random(type) {
-    let result = randomValue(type);
-
-    if (type == 'string') {
-        return encodeURIComponent(result);
-    }
-
-    return result;
-}
-
-describe('ДЗ 4 - Работа с DOM', () => {
-    describe('createDivWithText', () => {
-        it('должна возвращать элемент с тегом DIV', () => {
-            let text = random('string');
-            let result = createDivWithText(text);
-
-            assert.instanceOf(result, Element);
-            assert.equal(result.tagName, 'DIV');
-        });
-
-        it('должна добавлять текст в элемент', () => {
-            let text = random('string');
-            let result = createDivWithText(text);
-
-            assert.equal(result.innerText, text);
-        });
-    });
-
-    describe('prepend', () => {
-        it('должна добавлять элемент в начало', () => {
-            let where = document.createElement('div');
-            let what = document.createElement('p');
-            let whereText = random('string');
-            let whatText = random('string');
-
-            where.innerHTML = `, <b>${whereText}</b>!`;
-            what.innerText = whatText;
-
-            prepend(what, where);
-
-            assert.equal(where.firstChild, what);
-            assert.equal(where.innerHTML, `<p>${whatText}</p>, <b>${whereText}</b>!`);
-        });
-    });
-
-    describe('findAllPSiblings', () => {
-        it('должна возвращать массив с элементами, соседями которых являются P', () => {
-            let where = document.createElement('div');
-            let result;
-
-            where.innerHTML = '<div></div><p></p><span></span><span></span><p></p>';
-            result = findAllPSiblings(where);
-
-            assert.isTrue(Array.isArray(result));
-            assert.deepEqual(result, [where.children[0], where.children[3]]);
-        });
-    });
-
-    describe('findError', () => {
-        it('должна возвращать массив из текстового содержимого элементов', () => {
-            let where = document.createElement('div');
-            let text1 = random('string');
-            let text2 = random('string');
-            let result;
-
-            where.innerHTML = ` <div>${text1}</div>, <div>${text2}</div>!!!`;
-            result = findError(where);
-
-            assert.isTrue(Array.isArray(result));
-            assert.deepEqual(result, [text1, text2]);
-        });
-    });
-
-    describe('deleteTextNodes', () => {
-        it('должна удалить все текстовые узлы', () => {
-            let where = document.createElement('div');
-
-            where.innerHTML = ` <div></div>${random('string')}<p></p>${random('string')}`;
-            deleteTextNodes(where);
-
-            assert.equal(where.innerHTML, '<div></div><p></p>');
-        });
-    });
-
-    describe('deleteTextNodesRecursive', () => {
-        it('должна рекурсивно удалить все текстовые узлы', () => {
-            let where = document.createElement('div');
-            let text1 = random('string');
-            let text2 = random('string');
-            let text3 = random('string');
-
-            where.innerHTML = `<span> <div> <b>${text1}</b> </div> <p>${text2}</p> ${text3}</span>`;
-            deleteTextNodesRecursive(where);
-
-            assert.equal(where.innerHTML, '<span><div><b></b></div><p></p></span>');
-        });
-    });
-
-    describe('collectDOMStat', () => {
-        it('должна вернуть статистику по переданному дереву', () => {
-            let where = document.createElement('div');
-            let class1 = `class-${random('number')}`;
-            let class2 = `class-${random('number')}-${random('number')}`;
-            let text1 = random('string');
-            let text2 = random('string');
-            let stat = {
-                tags: { P: 1, B: 2 },
-                classes: { [class1]: 2, [class2]: 1 },
-                texts: 3
-            };
-            let result;
-
-            where.innerHTML = `<p class="${class1}"><b>${text1}</b> <b class="${class1} ${class2}">${text2}</b></p>`;
-            result = collectDOMStat(where);
-            assert.deepEqual(result, stat);
-        });
-    });
-
-    describe('observeChildNodes', () => {
-        it('должна вызывать fn при добавлении элементов в указанный элемент', done => {
-            let where = document.createElement('div');
-            let fn = info => {
-                assert.isObject(info, 'info должен быть объектом');
-                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-                assert.deepEqual(targetInfo.nodes, info.nodes);
-                done();
-            };
-            let elementToInsert = document.createElement('div');
-            let targetInfo = {
-                type: 'insert',
-                nodes: [elementToInsert]
-            };
-
-            document.body.appendChild(where);
-
-            observeChildNodes(where, fn);
-            where.appendChild(elementToInsert);
-
-            document.body.removeChild(where);
-        });
-
-        it('должна вызывать fn при добавлении множества элементов в указанный элемент', done => {
-            let where = document.createElement('div');
-            let fn = info => {
-                assert.isObject(info, 'info должен быть объектом');
-                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-                assert.deepEqual(targetInfo.nodes, info.nodes);
-                done();
-            };
-            let elementToInsert1 = document.createElement('div');
-            let elementToInsert2 = document.createElement('div');
-            let elementToInsert3 = document.createElement('div');
-            let targetInfo = {
-                type: 'insert',
-                nodes: [elementToInsert1, elementToInsert2, elementToInsert3]
-            };
-            let fragment = new DocumentFragment();
-
-            document.body.appendChild(where);
-
-            fragment.appendChild(elementToInsert1);
-            fragment.appendChild(elementToInsert2);
-            fragment.appendChild(elementToInsert3);
-
-            observeChildNodes(where, fn);
-            where.appendChild(fragment);
-
-            document.body.removeChild(where);
-        });
-
-        it('должна вызывать fn при удалении элементов из указанного элемента', done => {
-            let where = document.createElement('div');
-            let fn = info => {
-                assert.isObject(info, 'info должен быть объектом');
-                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-                assert.deepEqual(targetInfo.nodes, info.nodes);
-                done();
-            };
-            let elementToRemove = document.createElement('div');
-            let targetInfo = {
-                type: 'remove',
-                nodes: [elementToRemove]
-            };
-
-            document.body.appendChild(where);
-
-            where.appendChild(elementToRemove);
-            observeChildNodes(where, fn);
-            where.removeChild(elementToRemove);
-
-            document.body.removeChild(where);
-        });
-
-        it('должна вызывать fn при удалении множества элементов из указанного элемента', done => {
-            let where = document.createElement('div');
-            let fn = info => {
-                assert.isObject(info, 'info должен быть объектом');
-                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-                assert.deepEqual(targetInfo.nodes, info.nodes);
-                done();
-            };
-            let elementToRemove1 = document.createElement('div');
-            let elementToRemove2 = document.createElement('div');
-            let elementToRemove3 = document.createElement('div');
-            let targetInfo = {
-                type: 'remove',
-                nodes: [elementToRemove1, elementToRemove2, elementToRemove3]
-            };
-
-            document.body.appendChild(where);
-
-            where.appendChild(elementToRemove1);
-            where.appendChild(elementToRemove2);
-            where.appendChild(elementToRemove3);
-
-            observeChildNodes(where, fn);
-            where.innerHTML = '';
-
-            document.body.removeChild(where);
-        });
-    });
-});
+};
