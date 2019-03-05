@@ -37,16 +37,19 @@ const homeworkContainer = document.querySelector('#homework-container');
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
 function loadTowns() {
-    return new Promise(function(resolve) {
-        var xhr = new XMLHttpRequest();
-  
+    const cities = new Promise(function (resolve) {
+        const xhr = new XMLHttpRequest();
+
         xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json' );
         xhr.responseType = 'json';
-      
+        xhr.send();
         xhr.addEventListener('load', function () {
-            loadingBlock.innerHTML = '';
+            const cityList = xhr.response;
+
+            loadingBlock.style.display = 'none';
             filterBlock.style.display = 'block';
-            resolve(xhr.response.sort(function(a, b) {
+
+            cityList.sort(function(a, b) {
                 if (a.name > b.name) {
                     return 1;
                 }
@@ -55,11 +58,15 @@ function loadTowns() {
                 }
 
                 return 0;
-            }));
+            });
+            resolve(cityList);
         });
-        xhr.send();
     });
+
+    return cities;
 }
+
+let cities = loadTowns();
 
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
@@ -97,6 +104,33 @@ const filterResult = homeworkContainer.querySelector('#filter-result');
 
 filterInput.addEventListener('keyup', function() {
     // это обработчик нажатия кливиш в текстовом поле
+    let subString = event.target.value;
+
+    if (subString.trim() === '') {
+        let resultChildren = filterResult.querySelectorAll('DIV');
+
+        for (let child of resultChildren) {
+            child.remove();
+        }
+
+        return;
+    }
+
+    cities.then(function(cityList) {
+        let filtered = cityList.filter(function(city) {
+            if (isMatching(city.name, subString)) {
+                return city;
+            }
+        });
+
+        for (let city of filtered) {
+            let resultChild = document.createElement('DIV');
+
+            resultChild.textContent = city.name;
+            filterResult.appendChild(resultChild);
+        }
+    });
+    
 });
 
 export {
